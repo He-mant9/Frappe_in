@@ -10,6 +10,7 @@ sudo apt-get install xvfb libfontconfig wkhtmltopdf
 sudo apt-get install libmysqlclient-dev
 sudo mysql_secure_installation
 sudo nano /etc/mysql/my.cnf
+
 [mysqld]
 character-set-client-handshake = FALSE
 character-set-server = utf8mb4
@@ -17,11 +18,14 @@ collation-server = utf8mb4_unicode_ci
 
 [mysql]
 default-character-set = utf8mb4
+
 sudo service mysql restart
 sudo apt install curl
+
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 source ~/.profile
 nvm install 18
+
 sudo apt-get install npm
 sudo npm install -g yarn
 sudo pip3 install frappe-bench
@@ -29,13 +33,18 @@ bench init --frappe-branch version-15 frappe-bench
 cd frappe-bench
 chmod -R o+rx /home/hemant
 bench new-site site1
+cd sites
+nano currentsite.txt
+site1
+cd ..
+bench start
+bench use site1
 bench get-app payments
 bench get-app --branch version-15 erpnext
 bench get-app hrms
 bench --site site1 install-app erpnext
 bench --site site1 install-app hrms
-cd /frappe-bench/sites/nano currentsite.txt
-test.site1
+
 bench --site site1 enable-scheduler
 bench --site site1 set-maintenance-mode off
 sudo bench setup production hemant
